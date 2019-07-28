@@ -1,5 +1,53 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Setup Tailwind
+
+https://medium.com/@xijo/create-react-app-with-tailwind-via-postcss-plus-purgecss-5c36b4c33ba7
+
+npm install tailwindcss
+npm install npm-run-all
+npm install postcss-cli
+npm install purgecss
+(npm install @fullhuman/postcss-purgecss)
+
+## create postcss.config.js at root
+copy
+const purgecss = require('@fullhuman/postcss-purgecss')({
+  content: [
+    './src/**/*.jsx',
+    './src/**/*.js',
+    './public/index.html'
+  ],
+  css: ['./src/tailwind.css'],
+  // Include any special characters you're using in this regular expression
+  defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g) || []
+})module.exports = {
+  plugins: [
+    require('tailwindcss'),
+    require('autoprefixer'),
+    ...process.env.NODE_ENV === 'production' ? [purgecss] : []
+  ],
+};
+
+## init tailwind
+npx tailwind init tailwind.config.js
+create ./src/css/tailwind.src.css
+with    @tailwind base;
+        @tailwind components;
+        @tailwind utilities;
+import './tailwind.css in App.js
+
+## configure package.json
+"scripts": {
+  "start": "npm-run-all -p start:css start:js",
+  "build": "npm-run-all build:css build:js",
+  "start:js": "react-scripts start",
+  "build:js": "react-scripts build",
+  "start:css": "postcss src/css/tailwind.src.css -o src/tailwind.css -w",
+  "build:css": "postcss src/css/tailwind.src.css -o src/tailwind.css --env production" 
+},
+
+
 ## Available Scripts
 
 In the project directory, you can run:
