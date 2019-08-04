@@ -23,6 +23,10 @@
   color: #61dafb;
 }
 
+.circle-spin {
+  animation: App-logo-spin infinite 4s linear;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
